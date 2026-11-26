@@ -48,14 +48,10 @@ async function downloadPost(tab) {
   if (tabId == null || activeRequests.has(tabId)) return;
 
   const post = parsePost(tab.url);
-  if (!post) {
-    await setStatus(tabId, "!", "Abra a publicação com o vídeo ou GIF e tente novamente.");
-    return;
-  }
+  if (!post) return;
 
   activeRequests.add(tabId);
   try {
-    await setStatus(tabId, "…", "Buscando o vídeo no FxTwitter…");
     try {
       const url = await findVideo(post);
       if (url) {
@@ -64,7 +60,6 @@ async function downloadPost(tab) {
           filename: `x-${post.id}${post.videoNumber > 1 ? `-${post.videoNumber}` : ""}.mp4`,
           conflictAction: "uniquify"
         });
-        await setStatus(tabId, "✓", "Download do MP4 iniciado.");
         return;
       }
     } catch (error) {
@@ -72,18 +67,7 @@ async function downloadPost(tab) {
     }
 
     await chrome.tabs.create({ url: post.fallbackUrl, windowId: tab.windowId });
-    await setStatus(tabId, "", "Link de mídia aberto pelo FxTwitter.");
-  } catch (error) {
-    console.error(error);
-    await setStatus(tabId, "!", "Não foi possível abrir o link de mídia.");
   } finally {
     activeRequests.delete(tabId);
   }
-}
-
-function setStatus(tabId, text, title) {
-  return Promise.allSettled([
-    chrome.action.setBadgeText({ tabId, text }),
-    chrome.action.setTitle({ tabId, title })
-  ]);
 }
