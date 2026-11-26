@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Baixar vídeo do X",
+  "version": "1.0.0",
+  "description": "Baixe o vídeo ou GIF de uma publicação do X em um clique.",
+  "permissions": ["activeTab", "downloads"],
+  "host_permissions": ["https://api.fxtwitter.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Baixar vídeo do X",
+    "default_icon": "icone.png"
+  },
+  "icons": {
+    "128": "icone.png"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+V"
+      }
+    }
+  }
+}
