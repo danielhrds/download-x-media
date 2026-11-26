@@ -1,11 +1,11 @@
 # X Media Downloader
 
-Download videos and GIFs from X as MP4 files in Chrome or Edge.
+Download videos and GIFs from X as MP4 files in Chromium-based browsers.
 
 ## Installation
 
 1. On GitHub, choose **Code → Download ZIP** and extract the files.
-2. Open `chrome://extensions` or `edge://extensions` and enable **Developer mode**.
+2. Open your browser's extensions page (`chrome://extensions` in Chrome or `edge://extensions` in Edge) and enable **Developer mode**.
 3. Click **Load unpacked** and select the folder containing `manifest.json`.
 
 ## Usage
